@@ -1,0 +1,11 @@
+body {
+  background-color: bisque;
+}
+
+.card {
+  height: fit-content;
+  width: 300px;
+  border: 1px solid gray;
+  padding: 10px;
+  border-radius: 10px;
+}

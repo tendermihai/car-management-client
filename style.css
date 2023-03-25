@@ -1,47 +1,8 @@
-body {
-  background-color: bisque;
+.app-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 h1 {
   text-align: center;
-}
-.card {
-  height: fit-content;
-  width: 300px;
-  border: 1px solid gray;
-  text-align: center;
-  border-radius: 10px;
-}
-
-.container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  row-gap: 20px;
-  align-items: center;
-}
-
-.card:hover {
-  color: coral;
-}
-
-/* responsive for tablet */
-
-@media screen and (max-width: 800px) {
-  .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    row-gap: 20px;
-    align-items: center;
-  }
-}
-
-/* responsive for mobile*/
-
-@media screen and (max-width: 500px) {
-  .container {
-    display: grid;
-    grid-template-columns: 1fr;
-    row-gap: 20px;
-    align-items: center;
-  }
 }

@@ -1,3 +1,7 @@
+body {
+  background-color: beige;
+}
+
 .app-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -5,4 +9,44 @@
 
 h1 {
   text-align: center;
+}
+
+.mb-sm-0 {
+  cursor: pointer;
+}
+
+.mb-sm-0:hover {
+  color: coral;
+}
+
+.btn-primary:hover {
+  color: coral;
+}
+
+.p-4 {
+  height: 300px;
+  width: 250px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.addBtn {
+  background-color: #0d6efd;
+  color: white;
+  border-radius: 10px;
+}
+
+.submitCar {
+  background-color: #0d6efd;
+  color: white;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.editCar {
+  background-color: #0d6efd;
+  color: white;
+  border-radius: 10px;
+  margin-top: 20px;
 }

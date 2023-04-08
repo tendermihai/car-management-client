@@ -1,8 +1,24 @@
-async function getCars() {
-  let data = await fetch("http://localhost:5000/api/v1/car/all");
-  let conv = await data.json();
-  console.log(conv);
-  attachCards(conv);
+async function home() {
+  let container = document.querySelector(".app-container");
+
+  container.innerHTML = `
+  
+  <h1>Car Management</h1>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+  <button class="addBtn" onclick="location.href='addnew.html'">Add a new car</button>
+  
+  <select name="sort" class="sort">
+      <option value="sort">--Sort by--</option>
+      <option value="year">Sort by year</option>
+      <option value="model">Sort by model</option>
+      <option value="price">Sort by price</option>
+  
+  </select>
+  
+  `;
+
+  let data = await getAllCars();
+  attachCards(data);
 }
 
 function createCard(car) {
@@ -17,7 +33,7 @@ function createCard(car) {
   div.innerHTML = `
   
   <div class="card-body p-4">
-  <span class="badge rounded-pill bg-primary float-md-end mb-3 mb-sm-0">Delete</span>
+  <span class="badge delete rounded-pill bg-primary float-md-end mb-3 mb-sm-0">Delete</span>
   <h5>${car.model}</h5>
   <div class="mt-3">
 
@@ -47,11 +63,11 @@ function createCard(car) {
 
 function attachCards(cars) {
   console.log(cars);
-  let container = document.querySelector(".app-container");
+  let container = document.querySelector(".container");
   container.innerHTML = "";
   cars.forEach((car) => {
     container.appendChild(createCard(car));
   });
 }
 
-getCars();
+// functie ce adauga o masina noua

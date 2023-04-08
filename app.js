@@ -1,5 +1,4 @@
 home();
-
 let selectBtn = document.querySelector(".sort");
 
 //eventuri
@@ -17,7 +16,12 @@ let submitBtn = document.querySelector(".submitCar");
 
 if (submitBtn) {
   submitBtn.addEventListener("click", () => {
-    console.log("test");
+    const make = document.querySelector(".make").value;
+    const model = document.querySelector(".model").value;
+    const year = document.querySelector(".year").value;
+    const color = document.querySelector(".color").value;
+    const price = document.querySelector(".price").value;
+    postCar({ make, model, year, color, price }).value;
   });
 }
 

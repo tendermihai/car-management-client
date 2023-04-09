@@ -30,7 +30,7 @@ async function getSortedBy(field) {
   return cars.json();
 }
 
-async function postCar(car) {
+async function addCar(car) {
   let carResponse = await api("/api/v1/car/add", "POST", car);
 
   return carResponse.json();

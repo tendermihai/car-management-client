@@ -1,50 +1,38 @@
 home();
-let selectBtn = document.querySelector(".sort");
 
-//eventuri
-if (selectBtn) {
-  selectBtn.addEventListener("change", async () => {
-    console.log(selectBtn.value);
+// //eventuri
+// if (selectBtn) {
+//   selectBtn.addEventListener("change", async () => {
+//     console.log(selectBtn.value);
 
-    let data = await getSortedBy(selectBtn.value);
+//     let data = await getSortedBy(selectBtn.value);
 
-    attachCards(data);
-  });
-}
+//     attachCards(data);
+//   });
+// }
 
-let submitBtn = document.querySelector(".submitCar");
+// let container = document.querySelector(".container");
 
-if (submitBtn) {
-  submitBtn.addEventListener("click", () => {
-    const make = document.querySelector(".make").value;
-    const model = document.querySelector(".model").value;
-    const year = document.querySelector(".year").value;
-    const color = document.querySelector(".color").value;
-    const price = document.querySelector(".price").value;
-    postCar({ make, model, year, color, price }).value;
-  });
-}
+// if (container) {
+//   container.addEventListener("click", async (e) => {
+//     let obj = e.target;
 
-let container = document.querySelector(".container");
+//     if (obj.classList.contains("delete")) {
+//       let card = obj.closest(".col-lg-4");
+//       let id = card
+//         .querySelector(".text-muted:first-child")
+//         .textContent.split(":")[1]
+//         .trim();
 
-container.addEventListener("click", async (e) => {
-  let obj = e.target;
+//       await delCar(id);
+//       card.remove();
+//     }
+//   });
+// }
 
-  if (obj.classList.contains("delete")) {
-    let card = obj.closest(".col-lg-4");
-    let id = card
-      .querySelector(".text-muted:first-child")
-      .textContent.split(":")[1]
-      .trim();
+// let containerNew = document.querySelector(".update-container");
 
-    await delCar(id);
-    card.remove();
-  }
-});
-
-// let container = document.querySelector(".update-container");
-// console.log(container);
-// container.addEventListener("click", async (e) => {
+// containerNew.addEventListener("click", async (e) => {
 //   let obj = e.target;
 
 //   if (obj.classList.contains("editCar")) {
@@ -74,8 +62,7 @@ container.addEventListener("click", async (e) => {
 //     };
 
 //     await updatePutCar(updatedCar);
-
-//     // Redirect to home page after successful update
+//     attachCards();
 //     window.location.href = "index.html";
 //   }
 // });

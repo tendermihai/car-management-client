@@ -2,7 +2,7 @@ body {
   background-color: beige;
 }
 
-.container {
+.container-cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
@@ -62,4 +62,11 @@ h1 {
 
 .container-new {
   margin: 20px;
+}
+
+.cancelNew {
+  background-color: #0d6efd;
+  color: white;
+  border-radius: 10px;
+  margin-left: 20px;
 }

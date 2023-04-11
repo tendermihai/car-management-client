@@ -42,7 +42,11 @@ async function delCar(id) {
 }
 
 async function updatePutCar(car) {
-  let carResponse = await api("/api/v1/car/update", "PUT", car);
+  let data = {
+    car,
+  };
+  console.log(data);
+  let carResponse = await api("/api/v1/car/update", "PUT", data);
 
   return carResponse.json();
 }

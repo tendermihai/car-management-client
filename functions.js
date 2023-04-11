@@ -38,9 +38,39 @@ async function home() {
   container.addEventListener("click", (e) => {
     let obj = e.target;
     if (obj.classList.contains("btn-update")) {
-      updateCarPage();
+      console.log(obj.id.split("-")[1]);
+      updateCarPage(obj.id.split("-")[1]);
+    }
+    let selectBtn = document.querySelector(".sort");
+    if (selectBtn) {
+      selectBtn.addEventListener("change", async () => {
+        console.log(selectBtn.value);
+
+        let data = await getSortedBy(selectBtn.value);
+
+        attachCards(data);
+      });
     }
   });
+
+  let containerNew = document.querySelector(".container");
+
+  if (containerNew) {
+    containerNew.addEventListener("click", async (e) => {
+      let obj = e.target;
+
+      if (obj.classList.contains("delete")) {
+        let card = obj.closest(".col-lg-4");
+        let id = card
+          .querySelector(".text-muted:first-child")
+          .textContent.split(":")[1]
+          .trim();
+
+        await delCar(id);
+        card.remove();
+      }
+    });
+  }
 }
 
 function addCarPage() {
@@ -128,12 +158,16 @@ function addCarPage() {
       const color = document.querySelector(".color").value;
       const price = document.querySelector(".price").value;
       addCar({ make, model, year, color, price }).value;
+      home();
     });
   }
 }
 
-function updateCarPage() {
+async function updateCarPage(id) {
+  //todo sa gasim masina care are id ?
   let container = document.querySelector(".container");
+  let car = await findCar(id);
+  console.log(car, "this is the car");
   container.innerHTML = "";
   container.innerHTML = `
   <div class="container">
@@ -155,31 +189,31 @@ function updateCarPage() {
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Make:</label>
                             <div class="col-lg-8">
-                                <input class="form-control make" type="text" value="" placeholder="">
+                                <input class="form-control make" type="text" value="" placeholder="${car.make}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Model:</label>
                             <div class="col-lg-8">
-                                <input class="form-control model" type="text" value="" placeholder="">
+                                <input class="form-control model" type="text" value="" placeholder="${car.model}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Year:</label>
                             <div class="col-lg-8">
-                                <input class="form-control year" type="text" value="" placeholder="">
+                                <input class="form-control year" type="text" value="" placeholder="${car.year}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Color:</label>
                             <div class="col-lg-8">
-                                <input class="form-control color" type="text" value="" placeholder="">
+                                <input class="form-control color" type="text" value="" placeholder="${car.color}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Price:</label>
                             <div class="col-lg-8">
-                                <input class="form-control price" type="text" value="" placeholder="">
+                                <input class="form-control price" type="text" value="" placeholder="${car.price}">
                             </div>
 
                         </div>
@@ -188,34 +222,42 @@ function updateCarPage() {
             </div>
 
             <button class="editCar">Update</button>
+            <button class="cancelEdit">Cancel</button>
         </div>
 
     </div>
   
   `;
 
-  //   container.addEventListener("click", async (e) => {
-  //     let obj = e.target;
+  let cancelEdit = document.querySelector(".cancelEdit");
 
-  //     if (obj.classList.contains("editCar")) {
-  //       let make = document.querySelector(".make").value;
-  //       let model = document.querySelector(".model").value;
-  //       let year = document.querySelector(".year").value;
-  //       let color = document.querySelector(".color").value;
-  //       let price = document.querySelector(".price").value;
+  cancelEdit.addEventListener("click", () => {
+    home();
+  });
 
-  //       let updatedCar = {
-  //         make: make,
-  //         model: model,
-  //         year: year,
-  //         color: color,
-  //         price: price,
-  //       };
+  //todo
 
-  //       await updatePutCar(updatedCar);
-  //       window.location.href = "index.html";
-  //     }
-  //   });
+  let editBtn = document.querySelector(".editCar");
+
+  editBtn.addEventListener("click", async (e) => {
+    console.log(car);
+
+    let make = document.querySelector(".make").value;
+    let model = document.querySelector(".model").value;
+    let year = document.querySelector(".year").value;
+    let color = document.querySelector(".color").value;
+    let price = document.querySelector(".price").value;
+    await updatePutCar({
+      id,
+      make,
+      model,
+      year,
+      color,
+      price,
+    });
+
+    home();
+  });
 }
 
 function createCard(car) {
@@ -249,7 +291,7 @@ function createCard(car) {
           Price: ${car.price}</span>
   </div>
   <div class="mt-3">
-      <button class="btn btn-primary btn-update">Update</button>
+      <button class="btn btn-primary btn-update" id="id-${car.id}">Update</button>
   </div>
 </div>
   
@@ -267,4 +309,14 @@ function attachCards(cars) {
   });
 }
 
-// functie ce adauga o masina noua
+async function findCar(id) {
+  let data = await getAllCars();
+  let foundCar;
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].id === id) {
+      console.log(data[i]);
+      foundCar = data[i];
+    }
+  }
+  return foundCar;
+}

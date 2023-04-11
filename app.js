@@ -1,35 +1,5 @@
 home();
 
-// //eventuri
-// if (selectBtn) {
-//   selectBtn.addEventListener("change", async () => {
-//     console.log(selectBtn.value);
-
-//     let data = await getSortedBy(selectBtn.value);
-
-//     attachCards(data);
-//   });
-// }
-
-// let container = document.querySelector(".container");
-
-// if (container) {
-//   container.addEventListener("click", async (e) => {
-//     let obj = e.target;
-
-//     if (obj.classList.contains("delete")) {
-//       let card = obj.closest(".col-lg-4");
-//       let id = card
-//         .querySelector(".text-muted:first-child")
-//         .textContent.split(":")[1]
-//         .trim();
-
-//       await delCar(id);
-//       card.remove();
-//     }
-//   });
-// }
-
 // let containerNew = document.querySelector(".update-container");
 
 // containerNew.addEventListener("click", async (e) => {
